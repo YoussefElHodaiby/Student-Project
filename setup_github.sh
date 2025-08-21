@@ -24,10 +24,10 @@ git remote add origin https://github.com/YoussefElHodaiby/Student-Project.git
 git branch -M main
 
 echo "GitHub remote added successfully!"
-echo "Repository URL: https://github.com/YoussefElHodaiby/Student-Project.git
+echo "Repository URL: https://github.com/YoussefElHodaiby/Student-Project"
 echo
 echo "Next steps:"
-echo "1. Create a new repository on GitHub with the name: pytes"
+echo "1. Create a new repository on GitHub with the name: Student-Project"
 echo "2. Run: git push -u origin main"
 echo
 echo "Or create and push in one go:"
