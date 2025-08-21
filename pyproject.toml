@@ -3,10 +3,10 @@ requires = ["setuptools>=45", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "student-api-testing"
+name = "student-book-api-testing"
 version = "0.1.0"
-description = "API testing suite for Student management system"
-authors = [{name = "Your Name", email = "your.email@example.com"}]
+description = "API testing suite for Student and Book management system"
+authors = [{name = "Youssef ElHodaiby", email = "youssef.elhodaiby@example.com"}]
 license = {text = "MIT"}
 readme = "README.md"
 requires-python = ">=3.8"
@@ -17,10 +17,10 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/yourusername/student-api-testing"
-Repository = "https://github.com/yourusername/student-api-testing"
-Issues = "https://github.com/yourusername/student-api-testing/issues"
-Documentation = "https://github.com/yourusername/student-api-testing#readme"
+Homepage = "https://github.com/YoussefElHodaiby/Student-Project"
+Repository = "https://github.com/YoussefElHodaiby/Student-Project"
+Issues = "https://github.com/YoussefElHodaiby/Student-Project/issues"
+Documentation = "https://github.com/YoussefElHodaiby/Student-Project#readme"
 
 [tool.pytest.ini_options]
 testpaths = ["."]
@@ -38,5 +38,7 @@ addopts = [
 markers = [
     "slow: marks tests as slow (deselect with '-m \"not slow\"')",
     "integration: marks tests as integration tests",
-    "unit: marks tests as unit tests"
+    "unit: marks tests as unit tests",
+    "student: marks tests for student API endpoints",
+    "book: marks tests for book API endpoints"
 ]
