@@ -30,12 +30,6 @@ def test_get_validation():
 
 
 def test_post_validation():
-    # Build path to users.json relative to this file
-   # json_root = os.path.join(os.path.dirname(__file__), 'users.json')
-
-    # Safely open and load the JSON file
-   # with open(json_root) as json_file:
-       # json_payload = json.load(json_file)
     response = requests.post(base_url, json=request_payload)
 
     data = response.json()
