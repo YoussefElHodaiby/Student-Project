@@ -10,6 +10,10 @@ request_payload = {
     "bookName": "NEW"
 }
 
+request_payload_update={
+    "bookName": "UPDATED"
+}
+
 def test_get_books():
     response = requests.get(base_url)
     print(response.text)
@@ -27,6 +31,17 @@ def test_post_books():
 
 
 def test_put_single_book():
-    response = requests.post(base_url + "/3", json=request_payload)
+    response = requests.put(base_url + "/3", json=request_payload_update)
     print(response.text)
-    assert response.status_code == 200 or response.status_code == 201
+    assert response.status_code in [200, 201, 204]
+
+
+
+
+
+
+
+
+
+
+
