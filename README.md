@@ -8,44 +8,58 @@
 
 A full-stack Student Management System with comprehensive API testing capabilities. This project includes a Java Spring Boot backend, React frontend, and Python-based API testing suite.
 
-## 🚀 Quick Start
+## 🚀 Getting Started
 
-### For API Testing (Python):
-```bash
-git clone https://github.com/YoussefElHodaiby/Student-Project.git
-cd Student-Project
-python -m venv .venv
-source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-pip install -r requirements.txt
-python -m pytest -v
-```
+### Prerequisites
+- **Python 3.13+** 
+- **Java 17+** (for backend API)
+- **Maven** (for Java build)
 
-### For Backend (Java Spring Boot):
-```bash
-cd restassurd
-mvn spring-boot:run
-```
+### Setup Instructions
 
-### For Frontend (React):
-```bash
-cd frontend
-npm install
-npm start
-```
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/YoussefElHodaiby/Student-Project.git
+   cd Student-Project
+   ```
+
+2. **Install Python dependencies**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. **Start the backend API** (Java Spring Boot)
+   ```bash
+   cd restassurd
+   mvn spring-boot:run
+   ```
+   API will be available at `http://localhost:8082`
+
+4. **Run the tests**
+   ```bash
+   # Run all tests
+   pytest
+
+   # Run specific test files
+   pytest test_student.py
+   pytest test_books.py  
+   pytest test_scenrios.py
+
+   # Run with verbose output
+   pytest -v
+   ```
 
 ## 📁 Project Structure
 
 ```
 Student-Project/
 ├── 📂 Python API Testing Suite
-│   ├── student_api.py          # API client classes
-│   ├── test_student_api.py     # Pytest test cases
-│   ├── postcall.py            # Legacy testing script
-│   ├── conftest.py            # Pytest configuration
+│   ├── test_student.py         # Student API tests (GET, POST, validation)
+│   ├── test_books.py          # Book API tests (CRUD operations)
+│   ├── test_scenrios.py       # End-to-end scenario tests (create student → assign book)
 │   ├── pyproject.toml         # Project configuration
 │   ├── requirements.txt       # Python dependencies
-│   ├── run_tests.py           # Test runner script
-│   └── reports/              # Test reports directory
+│   └── reports/               # Test reports directory
 │
 ├── 📂 Backend (Java Spring Boot)
 │   ├── restassurd/
@@ -55,7 +69,7 @@ Student-Project/
 │   │   │   ├── StudentService.java
 │   │   │   └── BookService.java
 │   │   └── pom.xml
-│   └── data/                 # JSON data files
+│   └── data/                  # JSON data files
 │
 ├── 📂 Frontend (React)
 │   ├── src/components/
@@ -67,9 +81,8 @@ Student-Project/
 │   └── package.json
 │
 └── 📂 Configuration & Setup
-    ├── .github/workflows/    # CI/CD workflows
-    ├── setup_github.sh      # GitHub setup script
-    └── README.md           # This file
+    ├── setup_github.sh       # GitHub setup script
+    └── README.md             # This file
 ```
 
 ## 🛠️ Setup & Installation
@@ -109,66 +122,55 @@ Student-Project/
    ```
 3. **Frontend will be available at**: `http://localhost:3000`
 
-## 🧪 Running API Tests
+## 🧪 Testing Approach
 
-### Using pytest directly:
-```bash
-# Run all tests
-python -m pytest
+This project uses **pytest** with direct HTTP requests for API testing:
 
-# Run with verbose output
-python -m pytest -v
+- **Direct API Calls**: Uses `requests` library for straightforward HTTP requests
+- **Simple Assertions**: Clear, readable test validation without complex frameworks
+- **Scenario-Based Testing**: End-to-end workflows testing complete user journeys
+- **Random Test Data**: Dynamic test data generation for robust testing
 
-# Run with HTML report
-python -m pytest -v --html=reports/report.html --self-contained-html
-
-# Run specific test file
-python -m pytest test_student_api.py -v
-
-# Run specific test
-python -m pytest test_student_api.py::TestStudentAPI::test_create_student -v
-```
-
-### Using the test runner script:
-```bash
-python run_tests.py
-```
-
-### Using the legacy script:
-```bash
-python postcall.py
-```
+### Test Categories
+1. **Unit Tests**: Individual API endpoint validation
+2. **Integration Tests**: Cross-service functionality testing  
+3. **End-to-End Tests**: Complete user workflow scenarios
 
 ## ✨ Test Features
 
-- **Comprehensive pytest structure** with fixtures and test classes
-- **Full CRUD operations testing** (Create, Read, Update, Delete)
-- **Error handling** and HTTP status code validation
+- **Simple pytest structure** with direct HTTP requests
+- **API operations testing** (Create, Read, Update, Assignment)
+- **HTTP status code validation** and response verification
 - **Random test data generation** for realistic testing
-- **HTML test reports** for better visibility and CI/CD integration
+- **End-to-end scenario testing** with student-book assignment workflows
 - **Clean test isolation** with proper setup/teardown
 - **Parallel test execution** support
 
 ## 🎯 API Endpoints Tested
 
-### Student Management
+### Student Management (`test_student.py`)
+- `GET /students` - Get all students
 - `POST /students` - Create new student
-- `GET /students/{id}` - Get student by ID  
-- `PUT /students/{id}` - Update student information
-- `DELETE /students/{id}` - Delete student
+- `GET /students/{id}` - Get student by ID
 
-### Book Management
-- `POST /books` - Create new book
-- `GET /books/{id}` - Get book by ID
-- `PUT /books/{id}` - Update book information
-- `DELETE /books/{id}` - Delete book
+### Book Management (`test_books.py`)
+- `GET /api/books` - Get all books
+- `GET /api/books/{id}` - Get book by ID
+- `POST /api/books` - Create new book
+- `PUT /api/books/{id}` - Update book
+
+### End-to-End Scenarios (`test_scenrios.py`)
+- `POST /students` - Create new student
+- `GET /students/{id}` - Retrieve created student
+- `POST /api/books/{bookId}/assign/{studentId}` - Assign book to student
 
 ## ⚙️ Configuration
 
 ### API Testing Configuration
-The API base URL is set to `http://localhost:8082` by default. You can modify this in:
-- `student_api.py` - `StudentAPIClient` class
-- `conftest.py` - `api_base_url` fixture
+The API base URL is set to `http://localhost:8082` by default. You can modify this in the test files:
+- `test_student.py` - `base_url` variable
+- `test_books.py` - `base_url` variable  
+- `test_scenrios.py` - endpoint URLs
 
 ### Backend Configuration
 - **Port**: 8082
