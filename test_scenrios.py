@@ -90,11 +90,15 @@ def test_assign_book_to_student(create_student):
     assert data["studentName"] == random_name
 
 
-
-
-
-
-
-
-
-
+def test_create_book():
+    """Test creating a new book"""
+    request_payload_newbook = {
+        "bookName": "TEST"
+    }
+    response = requests.post(base_url_books, json=request_payload_newbook)
+    print(f"Create book response: {response.text}")
+    assert response.status_code in [200, 201]
+    data = response.json()
+    assert "id" in data
+    assert data["bookName"] == "TEST"
+    print(f"Successfully created book with ID: {data['id']}")
