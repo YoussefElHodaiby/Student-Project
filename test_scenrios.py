@@ -102,3 +102,20 @@ def test_create_book():
     assert "id" in data
     assert data["bookName"] == "TEST"
     print(f"Successfully created book with ID: {data['id']}")
+    return data["id"]  # Return the book ID for use in other tests
+
+
+def test_get_book_by_id():
+    """Test getting a book by ID"""
+    # First create a book to get its ID
+    book_id = test_create_book()
+    
+    response = requests.get(f"{base_url_books}/{book_id}")
+    print(f"Get book by ID response: {response.text}")
+    assert response.status_code == 200
+
+    data = response.json()
+    assert "id" in data
+    assert data["id"] == book_id
+    assert "bookName" in data
+    assert data["bookName"] == "TEST"
